@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>Oracle - 権限関連</title>
+</head>
+<body>
+    <a href="../index.html">一覧に戻る</a><br />
+    <br />
+
+    Oracle - 権限関連<br />
+    <br />
+    ■現行ユーザーが権限受領者であるオブジェクトの権限付与を示す方法<br />
+    （自身に付与されている権限）<br />
+    ※WHERE句は任意<br />
+    <br />
+    SELECT * FROM USER_TAB_PRIVS_RECD<br />
+    WHERE TABLE_NAME IN ('テーブル名','テーブル名')<br />
+    <br />
+    ■現行ユーザーがオブジェクト所有者、権限付与者または権限受領者であるオブジェクトの権限付与を示す方法<br />
+    ※WHERE句は任意<br />
+    <br/>
+    SELECT * FROM USER_TAB_PRIVS<br/>
+    WHERE TABLE_NAME IN ('テーブル名','テーブル名')<br/>
+
+    <br />
+    <br />
+
+
+    <a href="../index.html">一覧に戻る</a><br />
+</body>
+</html>
