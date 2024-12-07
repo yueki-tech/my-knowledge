@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>Linuxコマンド</title>
+</head>
+<body>
+    <a href="../index.html">一覧に戻る</a><br />
+    <br />
+
+    Linuxコマンド<br />
+    <br />
+    ■プロセスの確認<br />
+    ・全プロセス<br />
+    ps -ef<br />
+    <br />
+    ・httpdプロセスを検索し、自身のgrepプロセスは除外する方法<br />
+    ps -ef | grep httpd | grep -v 'grep httpd'<br />
+    <br />
+    ・tomcatプロセスを検索し、自身のgrepプロセスは除外する方法<br />
+    ps -ef | grep java | grep -v 'grep java'<br />
+    <br />
+    <br />
+
+
+    <a href="../index.html">一覧に戻る</a><br />
+</body>
+</html>
