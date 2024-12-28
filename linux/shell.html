@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>シェル関連</title>
+</head>
+<body>
+    <a href="../index.html">一覧に戻る</a><br />
+    <br />
+
+    シェル関連<br />
+    <br />
+    ■シェル実行前の環境変数の読み込み例(test.conf)<br />
+    export DBSERVER HOST=<br />
+    export ORACLE_BASE=<br />
+    export ORACLE_HOME=<br />
+    export ORACLE_SID=<br />
+    export PATH=$PATH:$ORACLE_HOME/bin<br />
+    export ORACLE_USR=<br />
+    export ORACLE_PWD=<br />
+    export LOG_FILE_DIR=<br />
+    export LOGFILE="${LOG_FILE_DIR}/test_$(date +%Y%m%d%H%M%S).log"<br />
+    <br />
+    ■シェルの実装例(test.sh)<br />
+    #!/bin/sh<br />
+    source ./test_conf.txt<br />
+    <br />
+    #ログファイルに標準出力及びエラー出力を行う<br />
+    exec >> "${LOG_FILE}" 2>&1<br />
+    <br />
+    #SQL実行結果を変数AAAに書き込む(「<< EOF」が以降の出力を読み込む命令となっている)<br />
+    AAA=`sqlplus -s ${ORACLE_USR}/${ORACLE_PWD}@${TNSNAME} << EOF<br />
+    set heading off;<br />
+    select test_name from test_table where id='1';<br />
+    exit;<br />
+    EOF`<br />
+
+    <br />
+    <br />
+
+
+    <a href="../index.html">一覧に戻る</a><br />
+</body>
+</html>

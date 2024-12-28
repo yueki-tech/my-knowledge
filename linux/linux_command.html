@@ -18,6 +18,19 @@
     ・tomcatプロセスを検索し、自身のgrepプロセスは除外する方法<br />
     ps -ef | grep java | grep -v 'grep java'<br />
     <br />
+    ■バックグランド実行方法<br />
+    バックラウンドで実行することにより、コンソールのセッションが切れても実行が途切れない。<br />
+    nohup sh /aaa/aaa.sh &<br />
+    <br />
+    ■vmstatの出力方法<br />
+    現在のディレクトリにtest.txtという名前でファイルに出力する場合。（終了はCtrl+C）<br />
+    vmstat -n 1 | awk '{"date \x27+%Y/%m/%d %H:%M:%S\x27" | getline d; print d " " $0; close("date \x27+%Y/%m/%d %H:%M:%S\x27")}' | tee ./test.txt<br />
+    <br />
+    ■プロセスの強制終了<br />
+    ①「ps -l | grep find」などで終了したいプロセスのPIDを確認する。<br />
+    ②PIDが100なら「kill 100」でプロセスを終了する。<br />
+    ※「ps -l」は自分のプロセスを表示する。<br />
+    <br />
     <br />
 
 
