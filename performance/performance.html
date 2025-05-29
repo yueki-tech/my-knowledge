@@ -9,15 +9,17 @@
     パフォーマンス・性能測定<br />
     <br />
     ■性能測定<br />
-    &nbsp;・DBSTAT<br />
-    &nbsp;&nbsp;・コンソールで1秒おきにstatを出力する場合<br />
-    &nbsp;&nbsp;&nbsp;vmstat -tn 1<br />
-    &nbsp;&nbsp;・ファイルで1秒おきにstatを出力する場合<br />
-    &nbsp;&nbsp;&nbsp;vmstat -n 1 | awk '{"date \x27+%Y/%m/%d %H:%M:%S\x27" | getline d; print d " " $0; close("date \x27+%Y/%m/%d %H:%M:%S\x27")}' | tee ./vmstat_outoput_test.txt<br />
-    &nbsp;・pidstat<br />
-    &nbsp;&nbsp;・プロセス番号を確認してから、その番号を指定してpidstatを確認する<br />
-    &nbsp;&nbsp;&nbsp;ps -ef | grep /usr/java/current/bin/java<br />
-    &nbsp;&nbsp;&nbsp;pidstat -p 99999 -u 1<br />
+    ・DBSTAT<br />
+    　・コンソールで1秒おきにstatを出力する場合<br />
+    　　⇒　vmstat -tn 1<br />
+    
+    　・ファイルで1秒おきにstatを出力する場合<br />
+    　　⇒　vmstat -n 1 | awk '{"date \x27+%Y/%m/%d %H:%M:%S\x27" | getline d; print d " " $0; close("date \x27+%Y/%m/%d %H:%M:%S\x27")}' | tee ./vmstat_outoput_test.txt<br />
+    
+    ・PIDSTAT<br />
+    　・プロセス番号を確認してから、その番号を指定してpidstatを確認する<br />
+    　　⇒　ps -ef | grep /usr/java/current/bin/java<br />
+    　　⇒　pidstat -p 99999 -u 1<br />
     <br />
     <br />
 
