@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>パフォーマンス・性能測定</title>
+</head>
+<body>
+    <a href="../index.html">一覧に戻る</a><br />
+    <br />
+
+    パフォーマンス・性能測定<br />
+    <br />
+    ■性能測定<br />
+    &nbsp;・DBSTAT<br />
+    &nbsp;&nbsp;・コンソールで1秒おきにstatを出力する場合<br />
+    &nbsp;&nbsp;&nbsp;vmstat -tn 1<br />
+    &nbsp;&nbsp;・ファイルで1秒おきにstatを出力する場合<br />
+    &nbsp;&nbsp;&nbsp;vmstat -n 1 | awk '{"date \x27+%Y/%m/%d %H:%M:%S\x27" | getline d; print d " " $0; close("date \x27+%Y/%m/%d %H:%M:%S\x27")}' | tee ./vmstat_outoput_test.txt<br />
+    &nbsp;・pidstat<br />
+    &nbsp;&nbsp;・プロセス番号を確認してから、その番号を指定してpidstatを確認する<br />
+    &nbsp;&nbsp;&nbsp;ps -ef | grep /usr/java/current/bin/java<br />
+    &nbsp;&nbsp;&nbsp;pidstat -p 99999 -u 1<br />
+    <br />
+    <br />
+
+
+    <a href="../index.html">一覧に戻る</a><br />
+</body>
+</html>
