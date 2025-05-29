@@ -10,26 +10,60 @@ MyBatis<br/>
 <br/>
 ■基礎知識<br/>
 <br/>
-・基礎知識 参考サイト①<br/>
-  qiita.com/TaikiTkwkbysh/items/9f598ed01c363b59fd98<br/>
+　・基礎知識 参考サイト①<br/>
+　　qiita.com/TaikiTkwkbysh/items/9f598ed01c363b59fd98<br/>
 <br/>
-・基礎知識 参考サイト②(カラムマッピング)<br/>
-  MyBatisにはカラム名とソースコードのフィールド名とのマッピングの仕組みがある。<br/>
-  qiita.com/yu_bookstore/items/f2563c2105cadeced6d0<br/>
+　・基礎知識 参考サイト②(カラムマッピング)<br/>
+　　MyBatisにはカラム名とソースコードのフィールド名とのマッピングの仕組みがある。<br/>
+　　qiita.com/yu_bookstore/items/f2563c2105cadeced6d0<br/>
 <br/>
-・BeanからInterfaceのMapperを介してxmlで定義したSQLを実行。Mapperの戻り値をEntityクラスのList型(List<xxEntity>)にして返却<br/>
-<br/>
-・xmlファイル内のifタグでSQL文を動的に変えている<br/>
-<br/>
-&lt;if test="...Flg"&gt;
-,columna
-&lt;/if&gt;
+　・BeanからInterfaceのMapperを介してxmlで定義したSQLを実行。Mapperの戻り値をEntityクラスのList型(List<xxEntity>
+    )にして返却<br />
+    <br />
+    ・xmlファイル内のifタグでSQL文を動的に変えている<br />
+    <br />
+    &lt;if test="...Flg"&gt;
+    ,columna
+    &lt;/if&gt;
+    <br />
+■プロパティーマスタから値を取得する実装例<br />
+　①プロパティーマスタ<br />
+　　KEY：key<br />
+　　VALUE：value<br />
+<br />
+　②Property.xmlファイル<br />
+　　&lt;select id="getProperty"<br />
+　　　　　resultType="jp.co.test.model.entity.PropertyEntity"<br />
+　　　　　parameterType="String"&gt;<br />
+        select<br />
+        &lt;include refid="propertyColumns" /&gt;<br />
+        from m_property p<br />
+        where<br />
+        p.key = #{key} and<br />
+        p.delete_flg = '0'<br />
+    </select><br />
+    <br />
+    ③PropertyMapper.java<br />
+    Public interface PropertyMapper {<br />
+    PropertyEntity getProperty(String key);<br />
+    }<br />
+    <br />
+    ④TestUtil.java<br />
+    public static String getProperty(String key) throws PropertyNotFoundException {<br />
+    SqlSession session = getSqlSession();  // システム毎にセッション取得の実装は異なるため詳細は割愛<br />
+    PropertyMapper mapper = session.getMapper(PropertyMapper.class);<br />
+    PropertyEntity entity = mapper.getProperty(key);<br />
+    return (entity==null) ? null : entity.getValue();<br />
+    }<br />
+    <br />
+    ⑤Test.java<br />
+    …<br />
+    String ret = TestUtil.getProperty("key");<br />
+    …<br />
+    <br />
+    <br />
 
 
-<br/>
-<br/>
-
-
-<a href="../index.html">一覧に戻る</a><br/>
+    <a href="../index.html">一覧に戻る</a><br />
 </body>
 </html>
