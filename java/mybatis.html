@@ -35,33 +35,33 @@ MyBatis<br/>
 　　&lt;select id="getProperty"<br />
 　　　　　resultType="jp.co.test.model.entity.PropertyEntity"<br />
 　　　　　parameterType="String"&gt;<br />
-        select<br />
-        &lt;include refid="propertyColumns" /&gt;<br />
-        from m_property p<br />
-        where<br />
-        p.key = #{key} and<br />
-        p.delete_flg = '0'<br />
-    </select><br />
+　　　　　select<br />
+　　　　　&lt;include refid="propertyColumns" /&gt;<br />
+　　　　　from m_property p<br />
+　　　　　where<br />
+　　　　　p.key = #{key} and<br />
+　　　　　p.delete_flg = '0'<br />
+　　&lt;/select&gt;<br />
     <br />
-    ③PropertyMapper.java<br />
-    Public interface PropertyMapper {<br />
-    PropertyEntity getProperty(String key);<br />
-    }<br />
-    <br />
-    ④TestUtil.java<br />
-    public static String getProperty(String key) throws PropertyNotFoundException {<br />
-    SqlSession session = getSqlSession();  // システム毎にセッション取得の実装は異なるため詳細は割愛<br />
-    PropertyMapper mapper = session.getMapper(PropertyMapper.class);<br />
-    PropertyEntity entity = mapper.getProperty(key);<br />
-    return (entity==null) ? null : entity.getValue();<br />
-    }<br />
-    <br />
-    ⑤Test.java<br />
-    …<br />
-    String ret = TestUtil.getProperty("key");<br />
-    …<br />
-    <br />
-    <br />
+　③PropertyMapper.java<br />
+　　Public interface PropertyMapper {<br />
+　　　　PropertyEntity getProperty(String key);<br />
+　　}<br />
+　　<br />
+　④TestUtil.java<br />
+　　public static String getProperty(String key) throws PropertyNotFoundException {<br />
+　　　　SqlSession session = getSqlSession();  // システム毎にセッション取得の実装は異なるため詳細は割愛<br />
+　　　　PropertyMapper mapper = session.getMapper(PropertyMapper.class);<br />
+　　　　PropertyEntity entity = mapper.getProperty(key);<br />
+　　　　return (entity==null) ? null : entity.getValue();<br />
+　　}<br />
+　　<br />
+　⑤Test.java<br />
+　　…<br />
+　　String ret = TestUtil.getProperty("key");<br />
+　　…<br />
+<br />
+<br />
 
 
     <a href="../index.html">一覧に戻る</a><br />

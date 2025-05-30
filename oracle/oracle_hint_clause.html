@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>ヒント句</title>
+</head>
+<body>
+<a href="../index.html">一覧に戻る</a><br/>
+<br/>
+
+<b>ヒント句</b><br/>
+<br/>
+■ヒント句<br/>
+　・ヒント句は、Oracleのオプティマイザが作成する実行計画を制御するヒント。<br/>
+　・ヒント句を使用することで、結合順、結合方法をオプティマイザに任せず指定することができる。<br/>
+　・ヒント句は通常のコメントの構文で、以下のようにコメント(/*+ /)の開始の/*の直後に(+)をつけるのがポイント。<br/>
+　　/*+ ヒント句 */<br/>
+<br/>
+　　具体的には、以下のようにSELECTの後にヒント句を記載する。<br/>
+　　例ではINDEXヒントを指定しており、指定したテーブルに対してインデックススキャンを実行する。<br/>
+<br/>
+　　select /*+ INDEX(employees emp_department_ix)*/ * from ～<br/>
+<br/>
+　　複数のヒントを使用する場合は、以下のようにヒント（例ではLEADINGとUSE_NL）を並べて指定すれば良い。<br/>
+<br/>
+　　select /*+ LEADING (e d) USE_NL(d) */ * from ～ <br/>
+<br/>
+　　また、ヒント句でのテーブル名は実名でなく別名（エイリアス）を指定する。<br/>
+<br/>
+　　ヒントが使用されない例） select /*+ FULL(DEPARTMENTS) */ * from hr.DEPARTMENTS d where d.manager_id = 200; <br/>
+<br/>
+　　ヒントが使用される例） select /*+ FULL(d) */ * from hr.DEPARTMENTS d where d.manager_id = 200; <br/>
+<br/>
+　　別名を使用していない場合は、以下のようにテーブル名をそのまま指定できる。<br/>
+<br/>
+　　select /*+ FULL(DEPARTMENTS) */ * from hr.DEPARTMENTS where manager_id = 200;<br/>
+<br/>
+　　通常はOracleのオプティマイザが統計情報を参照して最適な実行計画を選択してくれるものの、オプティマイザ統計が古くて実態とかけ離れていたり、複雑なSQLの場合（7つ以上の表を結合するなど）は最適な実行計画とならないことがありえる。そのようなときに実行計画に対するヒントを使用する。<br/>
+　　このように便利なヒント句だが、実際のデータが変わることにより、使用したヒントで作成された実行計画が最適ではなくなることもありえる。ヒント句がなければオプティマイザが最適な実行計画を選択するが、ヒント句があるために最適な実行計画が選ばれなくなってしまうことがある。<br/>
+　　ヒント句はたくさんあるものの、実際によく使うヒントはLEADING, USE_NL, INDEX, FULL, USE_HASH。<br/>
+<br/>
+　　LEADING  <br/>
+　　USE_NL  <br/>
+　　INDEX  <br/>
+　　FULL  <br/>
+　　USE_HASH  <br/>
+<br/>
+　●LEADING<br/>
+　　・LEADINGヒントは、表を結合する順序を指定できる。<br/>
+　　　大抵はUSE_NL/USE_HASHヒントと組み合わせて利用する。<br/>
+<br/>
+　　　構文： LEADING([表名] [表名] ・・・)<br/>
+<br/>
+　　　例： /*+ LEADING(a b c)<br/>
+<br/>
+　●USE_NL<br/>
+　　・USE_NLヒントは、指定された各表をネステッドループ結合(nested loop join)で結合する。<br/>
+　<br/>
+　●NESTED LOOP<br/>
+　　・nested loopはオプティマイザがアクセス対象のデータが比較的少ない場合に選択されることが多い結合方法。<br/>
+<br/>
+　　　以下は実行例。<br/>
+　　　※最適化としては意味がないが実行計画の行数が少なくなるようにFULLヒントを使用。<br/>
+<br/>
+　　　構文： USE_NL([内部表1] [内部表2] ・・・)<br/>
+<br/>
+　　　例： /*+ LEADING(A B C) USE_NL(B C) */<br/>
+<br/>
+　　　select /*+ FULL(b) FULL(a) LEADING(a b) USE_NL(b) */ *<br/>
+　　　from departments a,<br/>
+　　　 employees b<br/>
+　　　where a.manager_id = b.manager_id;<br/>
+<br/>
+　●USE_HASH<br/>
+　　・USE_HASHヒントは、指定された各表をハッシュ結合を使用して結合する。<br/>
+　　　通常LEADINGヒントと一緒に使用する。<br/>
+<br/>
+　　　構文： USE_HASH([内部表1] [内部表2] ・・・)<br/>
+<br/>
+　　　例： /*+ LEADING(A B C) USE_HASH(B C) */<br/>
+<br/>
+　　　3つの表でハッシュ結合した場合の例。<br/>
+　　　LEADINGヒントでa,b,cと指定しているので、最初にaとbで結合し、その後にその結果とcを結合している。<br/>
+<br/>
+　　　select /*+ FULL(c) FULL(b) FULL(a) LEADING(a b c) USE_HASH(b c) */ * from departments a, employees b, locations c where a.manager_id = b.manager_id and a.location_id = c.location_id; <br/>
+<br/>
+　　　また、ハッシュ表を指定する場合は、SWAP_JOIN_INPUTSヒントを使用する。<br/>
+　　　SWAP_JOIN_INPUTS(表別名)で、指定した表がハッシュ表として利用されるようになる。<br/>
+<br/>
+　●FULL<br/>
+　　・FULLヒントは、指定した表に対してフルスキャンを実行する。<br/>
+<br/>
+　　　構文： FULL([表名])<br/>
+<br/>
+　　　例： /*+ FULL(A) */<br/>
+<br/>
+　　　以下はFULLヒントを使用した実行例。<br/>
+<br/>
+　　　select /*+ FULL(b) */ * from employees b where b.last_name = 'King';<br/>
+<br/>
+　●INDEX<br/>
+　　・INDEXヒントは、指定した表に対してインデックススキャンを実行します。<br/>
+<br/>
+　　　構文： INDEX([表名] [インデックス名])<br/>
+<br/>
+　　　例： /*+ INDEX(A IDX) */<br/>
+　　　※表の別名AのIDXインデックスを使用する場合<br/>
+<br/>
+　　　以下はINDEXヒントを使用した実行例。<br/>
+<br/>
+　　　select /*+ INDEX(b EMP_NAME_IX) */ *<br/>
+　　　from <br/>
+　　　 employees b<br/>
+　　　where b.last_name = 'King';<br/>
+<br/>
+<br/>
+
+
+<a href="../index.html">一覧に戻る</a><br/>
+</body>
+</html>

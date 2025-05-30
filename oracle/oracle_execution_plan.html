@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>実行計画</title>
+</head>
+<body>
+    <a href="../index.html">一覧に戻る</a><br/>
+    <br/>
+
+    <b>実行計画</b><br/>
+    <br/>
+    ■実行計画<br/>
+    <br/>
+    ・実行計画を確認する方法はいくつもあるが、ここではSQLPlusで接続し、DBMS_XPLANを使用する。<br/>
+    SQLPlusでDBへ接続し、以下のようにコマンドを実行して確認する。<br/>
+    　<br/>
+    　set serveroutput off <br/>
+    　set linesize 1000 <br/>
+    　set pagesize 0<br/>
+    　<br/>
+    　※実行計画を表示するSQLを実行する。 select /*+ FULL(d) */ * from hr.DEPARTMENTS d where d.manager_id = 200; <br/>
+    　<br/>
+    ・SQL実行後、DBMS_XPLAN.DISPLAY_CURSORを使用して直前に実行したSQLの実行計画を表示する。<br/>
+    　<br/>
+    　select * from table(DBMS_XPLAN.DISPLAY_CURSOR(format=>'ALL LAST')); <br/>
+    　<br/>
+    　※一部省略。formatは色々とオプションがある。最低限で良ければBASICを指定します。<br/>
+    　※ヒント句を扱うには実行計画が読める必要がある。<br/>
+    　<br/>
+    ・直前に実行したSQLの実行計画を取得する方法<br/>
+    　<br/>
+    　SQL> set serveroutput off <br/>
+    　→　正しく取得できないので、「set serveroutput off」は必ず実行。<br/>
+    　<br/>
+    　SQL> set linesize 1000 SQL> set pagesize 0 <br/>
+    　→　折り返しやページ変更が発生しないように設定。 <br/>
+    　<br/>
+    　SQL> select emp.first_name, emp.last_name, j.job_title from employees emp, jobs j where emp.job_id = j.job_id and emp.salary = 8300.00; <br/>
+    　→　実行計画を取得するSQLを実行。<br/>
+    　<br/>
+    　SQL> select * from table(DBMS_XPLAN.DISPLAY_CURSOR()); <br/>
+    　→　実行計画取得。DBMS_XPLAN.DISPLAYを引数なしで呼ぶ。引数なしだと直前に実行したSQLの実行計画を取得できる。 <br/>
+    　<br/>
+    ・実行計画の取得対象から除外するにはSQLファイルの中で以下のように記述。<br/>
+    　exec DBMS_STATS.LOCK_TABLE_STATS('スキーマ名','テーブル名')<br/>
+    <br/>
+    <br/>
+
+
+    <a href="../index.html">一覧に戻る</a><br/>
+</body>
+</html>
