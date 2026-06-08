@@ -1,3 +1,5 @@
+## マークダウンファイルのレイアウト設定
+## xxx.mdの拡張子をURL上はxxx.htmlにしないとhtml化されない点に注意。
 title: My-KNOWLEDGE
 markdown: kramdown
 ##thema: minima
