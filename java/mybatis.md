@@ -14,9 +14,9 @@
       Mapperの戻り値をEntityクラスのList型(List&lt;xxEntity&gt;)にして返却
       　
     ・xmlファイル内のifタグでSQL文を動的に変えている
-      &lt;if test="...Flg"&gt;
+      <if test="...Flg">
         ,columna
-      &lt;/if&gt;
+      </if&>
 
 #### ■プロパティーマスタから値を取得する実装例
     ①プロパティーマスタ
@@ -24,16 +24,16 @@
       VALUE：value
 
     ②Property.xmlファイル
-      &lt;select id="getProperty"
+      <select id="getProperty"
         resultType="jp.co.test.model.entity.PropertyEntity"
-        parameterType="String"&gt;
+        parameterType="String">
         select
-        &lt;include refid="propertyColumns" /&gt;
+        <include refid="propertyColumns" />
         from m_property p
         where
         p.key = #{key} and
         p.delete_flg = '0'
-      &lt;/select&gt;
+      </select>
 
     ③PropertyMapper.java
       Public interface PropertyMapper {
