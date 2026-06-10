@@ -1,11 +1,11 @@
 [一覧に戻る](../index.html)
 
-## Java開発環境構築（その他）
+### Java開発環境構築（その他）
 
-### ■Maven
+#### ■Maven
 ・Mavenプロジェクトの場合、プロジェクトのプロパティで、「Maven＞プロジェクトの更新」を行う。
 
-### lombok
+#### lombok
 ・lombok 1.16.18はPleiadesの2024/10版では@getter等でエラーになる。
 2023/12版のPleiadesならエラーにならない。
 
