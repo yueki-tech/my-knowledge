@@ -4,7 +4,7 @@
 
 #### ■SQL起動準備
     サーバ接続後、必要の応じて環境変数の設定を行ってからSQLPlusを起動する。
-    尚、NLS_LANGは複数言語のサポートの可能。
+    尚、NLS_LANGは複数言語のサポート可能。
       $ export NLS_LANGUAGE=Japanese_Japan.AL32UTF8
       $ export NLS_LANGUAGE=Japanese_Japan.AL32UTF8
       $ export ORACLE_HOME=/opt/oracle/product/19.3.0/client_1
