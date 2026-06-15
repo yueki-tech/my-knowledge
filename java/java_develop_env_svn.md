@@ -1,6 +1,6 @@
 [一覧に戻る](../index.html)
 
-### ■Java開発環境構築（SVN）
+### Java開発環境構築（SVN）
     ①SubVersionの最新のインストーラと日本語パックをＤＬしてインストール。
     　SVNのアカウントで取得対象のリポジトリが表示できること
     ②JDKインストールor配置(例：C:\Program Files\java\配下)
