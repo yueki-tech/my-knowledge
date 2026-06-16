@@ -2,12 +2,12 @@
     
 #### ■設計
 
-[概要設計(バッチ)](./process/hileveldesign_batch.html "概要設計(バッチ)")
+  [概要設計(バッチ)](./process/hileveldesign_batch.html "概要設計(バッチ)")
 
-    ・<a href="./process/hileveldesign_batch.html">概要設計(バッチ)</a>
+#### ■パフォーマンス・性能測定
 
+  [性能測定](./performance/performance.html "性能測定")
 
-    ■パフォーマンス・性能測定
     ・<a href="./performance/performance.html">性能測定</a>
     
     ■Java
