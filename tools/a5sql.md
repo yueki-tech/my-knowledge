@@ -3,7 +3,8 @@
 ### A5SQL
     
 #### ■コンソールに出力する方法
-    A5SQLのコンソールにDBMS_OUPUT.PUT_LINEのメッセージを表示するには、以下のようにDBMS_PUTLINE.ENABLEメソッドで有効化して出力を行う。
+    A5SQLのコンソールにDBMS_OUPUT.PUT_LINEのメッセージを表示するには、
+    以下のようにDBMS_PUTLINE.ENABLEメソッドで有効化して出力を行う。
     
       DBMS_OUTPUT.ENABLE;
       -- SQL文出力
