@@ -1,7 +1,11 @@
 [一覧に戻る](../index.html)
 
 ### シェル関連
-    
+
+#### ■変数のセットと使い方
+    dir=/home/someone/
+    filepath="$dir"sample.txt
+
 #### ■シェル実行前の環境変数の読み込み例(test.conf)
     export DBSERVER HOST=
     export ORACLE_BASE=
