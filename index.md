@@ -7,7 +7,7 @@
   [性能測定](./performance/performance.html "性能測定")  
 
 #### ■仮想化
-  [仮想化概要](./virtualization/virtualization_outline.html "仮想化概要")
+  [仮想化概要](./virtualization/virtualization_outline.html "仮想化概要")  
   [Vagrant](./virtualization/vagrant.html "Vagrant")
 
 #### ■Java
