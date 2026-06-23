@@ -6,6 +6,10 @@
 #### ■パフォーマンス・性能測定
   [性能測定](./performance/performance.html "性能測定")  
 
+#### ■仮想化
+  [仮想化概要](./virtualization/virtualization_outline.html "仮想化概要")
+  [Vagrant](./virtualization/vagrant.html "Vagrant")
+
 #### ■Java
   [Java開発環境（SVN）](./java/java_develop_env_svn.html "Java開発環境（SVN）")  
   [Java開発環境（Git）](./java/java_develop_env_git.html "Java開発環境（Git）")  
