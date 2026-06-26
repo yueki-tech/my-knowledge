@@ -35,6 +35,7 @@
   [SVN](./repository/svn.html "SVN")  
     
 #### ■Linux
+  [TeraTerm](./linux/teraterm.html "TeraTerm")  
   [Linuxコマンド](./linux/linux_command.html "Linuxコマンド")  
   [シェル関連](./linux/shell.html "シェル関連")  
 
