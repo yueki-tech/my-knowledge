@@ -39,7 +39,7 @@
   [シェル関連](./linux/shell.html "シェル関連")  
 
 #### ■Windows
-  [コマンドプロンプト／Windowsバッチ](./windows/winbatch.html "コマンドプロンプト／Windowsバッチ")  
+  [コマンド／Windowsバッチ](./windows/winbatch.html "コマンド／Windowsバッチ")  
 
 #### ■ツール
   [JP1](./tools/jp1.html "JP1")  
